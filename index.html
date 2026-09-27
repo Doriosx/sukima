@@ -1743,7 +1743,7 @@ h2 {
         <span class="video-title">NECROMANCIA · SOUND HOLIC</span>
       </a>
     </div>
-    <p class="hint">Видео с YouTube (загрузил канал Kappashiro); плеер подгружается только после нажатия. Поддержать кружок: <a href="https://sound-holic.booth.pm/items/3242237">альбом на BOOTH</a>, <a href="https://open.spotify.com/track/0kLxLyi2HfVEDeWS6j2WQK">трек на Spotify</a>.</p>
+    <p class="hint">Видео с YouTube (загрузил канал Kappashiro); плеер подгружается только после нажатия. Если YouTube просит войти и не пускает, <a href="https://www.youtube.com/watch?v=3aCG1YycPso" target="_blank" rel="noopener">откройте видео на самом YouTube</a>. Поддержать кружок: <a href="https://sound-holic.booth.pm/items/3242237">альбом на BOOTH</a>, <a href="https://open.spotify.com/track/0kLxLyi2HfVEDeWS6j2WQK">трек на Spotify</a>.</p>
   </div>
 
   <div class="subsection maribel">
@@ -4231,7 +4231,9 @@ function initVideo() {
       const id = link.dataset.yt;
       const frame = h('iframe', {
         class: 'video-frame',
-        src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`,
+        // Обычный youtube.com, а не youtube-nocookie: на nocookie вход в аккаунт не виден,
+        // и проверка YouTube «войдите, что вы не бот» зацикливается.
+        src: `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`,
         title: link.getAttribute('aria-label') || 'Видео YouTube',
         allow: 'autoplay; encrypted-media; picture-in-picture; fullscreen',
         allowfullscreen: true,
