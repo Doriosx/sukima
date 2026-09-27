@@ -4250,15 +4250,11 @@ function initGallery() {
 // ── 46-video.js ──
 // Видео с YouTube: сначала только обложка, плеер — по нажатию.
 // Так страница не тянет тяжёлый плеер YouTube, пока его не попросили.
-// В просмотрщике claude.ai чужие сайты во фреймах запрещены, поэтому там
-// обложка остаётся обычной ссылкой и видео открывается на YouTube.
 
 function initVideo() {
-  const inViewer = Boolean(window.claude && typeof window.claude.use === 'function');
   for (const link of $$('.video-open')) {
     const img = link.querySelector('img');
     if (img) img.addEventListener('error', () => img.remove());
-    if (inViewer) continue;
     link.addEventListener('click', (ev) => {
       ev.preventDefault();
       const id = link.dataset.yt;
@@ -4489,19 +4485,6 @@ function initTicket() {
     draw();
   });
 
-  // Сохранение: в просмотрщике claude.ai — через возможность downloads,
-  // в обычном браузере — ссылкой на скачивание.
-  const hasViewer = !!(window.claude && typeof window.claude.use === 'function');
-  let downloads = null;
-  if (hasViewer) {
-    saveBtn.disabled = true;
-    window.claude.use('downloads').then((ns) => {
-      downloads = ns;
-      if (ns) saveBtn.disabled = false;
-      else saveBtn.hidden = true;
-    }, () => { saveBtn.hidden = true; });
-  }
-
   saveBtn.addEventListener('click', async () => {
     draw();
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
@@ -4511,21 +4494,6 @@ function initTicket() {
     }
     const no = memberNo(nick.value.trim());
     const filename = no ? `sukima-bilet-${no}.png` : 'sukima-bilet.png';
-    if (downloads) {
-      try {
-        await downloads.save({ filename, data: blob });
-        status.textContent = 'Билет сохранён.';
-      } catch (err) {
-        const code = err && err.code;
-        if (code === 'declined') status.textContent = 'Сохранение отменено.';
-        else if (code === 'rate_limited') status.textContent = 'Окно сохранения уже открыто. Закройте его и попробуйте снова.';
-        else {
-          status.textContent = 'Здесь сохранить не получится: просмотрщик не разрешает загрузки.';
-          saveBtn.hidden = true;
-        }
-      }
-      return;
-    }
     const url = URL.createObjectURL(blob);
     const link = h('a', { href: url, download: filename });
     document.body.append(link);
