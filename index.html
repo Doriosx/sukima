@@ -1551,7 +1551,7 @@ h2 {
   </ol>
   <figure class="fan fan--family">
     <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари, Ран и Чен">
-      <img src="img/fan-family-three-sm.webp" data-full="img/fan-family-three.webp" width="720" height="960" decoding="async" loading="lazy" alt="Семья Якумо: Юкари стоит, рядом девятихвостая Ран и Чен с кошачьими ушами">
+      <img src="img/fan-family-three-sm.webp" data-full="img/fan-family-three.webp" width="736" height="1041" decoding="async" loading="lazy" alt="Семья Якумо: Юкари стоит, рядом девятихвостая Ран и Чен с кошачьими ушами">
     </button>
     <figcaption><span class="fan-cap">Юкари, Ран и Чен</span> <span class="fan-credit">Автор не указан</span></figcaption>
   </figure>
@@ -1755,13 +1755,13 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Под большим зонтом">
         <img src="img/fan-big-umbrella-sm.webp" data-full="img/fan-big-umbrella.webp" width="900" height="1275" decoding="async" loading="lazy" alt="Юкари полулежит под огромным бумажным зонтом">
       </button>
-      <figcaption><span class="fan-cap">Под большим зонтом</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Под большим зонтом</span> <span class="fan-credit">Автор: <a href="https://www.pixiv.net/artworks/41709247" rel="noopener" target="_blank">kamisa</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: С дорожным знаком, как в 萃夢想">
         <img src="img/fan-road-sign-sm.webp" data-full="img/fan-road-sign.webp" width="1600" height="1020" decoding="async" loading="lazy" alt="Юкари с зонтиком и дорожными знаками">
       </button>
-      <figcaption><span class="fan-cap">С дорожным знаком, как в 萃夢想</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">С дорожным знаком, как в 萃夢想</span> <span class="fan-credit">Автор: <a href="https://www.pixiv.net/artworks/27128185" rel="noopener" target="_blank">うたたnue</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Улыбка">
@@ -1794,10 +1794,10 @@ h2 {
       <figcaption><span class="fan-cap">Очень близко</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
-      <button type="button" class="shot-open" aria-label="Открыть крупнее: Веер, сукимы и бабочки">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: 幻巣「飛光虫ネスト」 глазами художника">
         <img src="img/fan-gaps-butterflies-sm.webp" data-full="img/fan-gaps-butterflies.webp" width="1200" height="874" decoding="async" loading="lazy" alt="Юкари с веером среди разрывов и светящихся бабочек">
       </button>
-      <figcaption><span class="fan-cap">Веер, сукимы и бабочки</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">幻巣「飛光虫ネスト」 глазами художника</span> <span class="fan-credit">Автор: <a href="https://www.pixiv.net/artworks/59145259" rel="noopener" target="_blank">菊月</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Коса и табард">
@@ -1825,7 +1825,7 @@ h2 {
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: В тёмно-синем">
-        <img src="img/fan-navy-sm.webp" data-full="img/fan-navy.webp" width="736" height="1041" decoding="async" loading="lazy" alt="Юкари в тёмно-синем платье с поясом, в руке зонтик">
+        <img src="img/fan-navy-sm.webp" data-full="img/fan-navy.webp" width="720" height="960" decoding="async" loading="lazy" alt="Юкари в тёмно-синем платье с поясом, в руке зонтик">
       </button>
       <figcaption><span class="fan-cap">В тёмно-синем</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
@@ -4071,49 +4071,79 @@ const PATTERNS = {
 };
 
 // ── 45-gallery.js ──
-// Скриншоты открываются крупно в диалоге. Мелкие кадры игр увеличиваются
-// не больше чем вдвое и без сглаживания, как пиксельная графика.
+// Увеличение картинок в диалоге.
+// Сначала показывается превью этой же картинки (оно уже загружено), потом,
+// когда догрузится, — полная версия. Пока новое превью не готово, окно пустое,
+// поэтому прежняя картинка не мелькает. Размер окна считается по размеру полной
+// версии (атрибуты width/height), так что при подмене ничего не прыгает.
+// Скриншоты игр — пиксельная графика: их можно увеличить вдвое без сглаживания.
+// Рисунки фанатов не увеличиваются больше натурального размера, иначе мылятся.
 
 function initGallery() {
   const box = $('#lightbox');
   if (!box || typeof box.showModal !== 'function') return;
   const img = $('#lightbox-img');
   const cap = $('#lightbox-cap');
+  let current = null;
+  let token = 0;
+  let shownLevel = 0;
 
-  let isArt = false;
   const fit = () => {
-    const w = img.naturalWidth;
-    const hgt = img.naturalHeight;
-    if (!w || !hgt) return;
-    // Скриншоты игр — пиксельная графика: их можно увеличить вдвое без сглаживания.
-    // Рисунки фанатов не увеличиваем больше натурального размера, иначе они мылятся.
+    if (!current) return;
+    const { w, h: hgt, isArt } = current;
     const maxScale = isArt ? 1 : 2;
     const width = Math.min(window.innerWidth * 0.92, ((window.innerHeight * 0.9 - 90) * w) / hgt, w * maxScale);
     img.classList.toggle('is-pixel', !isArt && w <= 640);
     img.style.width = Math.max(200, Math.floor(width)) + 'px';
   };
-  img.addEventListener('load', fit);
   window.addEventListener('resize', () => { if (box.open) fit(); });
+
+  // level: 1 — превью, 2 — полная версия; более грубая не заменяет более чёткую.
+  const show = (src, mine, level) => {
+    const probe = new Image();
+    probe.src = src;
+    const put = () => {
+      if (mine !== token || !box.open || level <= shownLevel) return;
+      shownLevel = level;
+      img.src = src;
+      img.style.visibility = 'visible';
+    };
+    (probe.decode ? probe.decode() : Promise.resolve()).then(put, put);
+  };
 
   for (const btn of $$('.shot-open')) {
     btn.addEventListener('click', () => {
       const pic = btn.querySelector('img');
       const caption = btn.closest('figure')?.querySelector('figcaption');
-      isArt = Boolean(btn.closest('.fan'));
-      img.src = pic.dataset.full || pic.currentSrc || pic.src;
+      const preview = pic.currentSrc || pic.src;
+      const full = pic.dataset.full || preview;
+      current = {
+        w: Number(pic.getAttribute('width')) || pic.naturalWidth,
+        h: Number(pic.getAttribute('height')) || pic.naturalHeight,
+        isArt: Boolean(btn.closest('.fan')),
+      };
+      const mine = ++token;
+      shownLevel = 0;
+      img.style.visibility = 'hidden';
       img.alt = pic.alt;
       const parts = caption ? [...caption.querySelectorAll('.fan-cap, .fan-credit')].map((n) => n.textContent.trim()) : [];
       cap.textContent = parts.length
         ? parts.join(' · ')
         : caption ? caption.textContent.replace(/\s+/g, ' ').trim() : '';
+      fit();
       box.showModal();
-      if (img.complete) fit();
+      show(preview, mine, 1);
+      if (full !== preview) show(full, mine, 2);
     });
   }
   $('#lightbox-close').addEventListener('click', () => box.close());
   // Щелчок по затемнению вокруг снимка закрывает его.
   box.addEventListener('click', (ev) => {
     if (ev.target === box) box.close();
+  });
+  box.addEventListener('close', () => {
+    token++;
+    img.style.visibility = 'hidden';
   });
 }
 
