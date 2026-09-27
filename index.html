@@ -6,6 +6,7 @@
 <title>Клуб «Сукима»</title>
 <meta name="description" content="Неофициальный клуб любителей Юкари Якумо из Touhou Project: досье, спелл-карты с мини-игрой, хроника и членский билет.">
 <link rel="canonical" href="https://doriosx.github.io/sukima/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Crect width=%2724%27 height=%2724%27 rx=%274%27 fill=%27%23231a2b%27/%3E%3Cg fill=%27%23bca6e6%27%3E%3Crect x=%274%27 y=%273%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%2713.5%27 y=%273%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%274%27 y=%276.2%27 width=%2716%27 height=%272.2%27/%3E%3Crect x=%274%27 y=%279.4%27 width=%2716%27 height=%272.2%27/%3E%3Crect x=%274%27 y=%2712.6%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%2713.5%27 y=%2712.6%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%274%27 y=%2715.8%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%2713.5%27 y=%2715.8%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%274%27 y=%2719%27 width=%276.5%27 height=%272.2%27/%3E%3Crect x=%2713.5%27 y=%2719%27 width=%276.5%27 height=%272.2%27/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Клуб «Сукима»">
@@ -581,6 +582,9 @@ h2 {
 .boundary-tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 .boundary-view {
   position: relative;
+  /* Явная ширина: иначе min-height через aspect-ratio раздувал блок
+     шире экрана телефона. */
+  width: 100%;
   aspect-ratio: 16 / 7;
   min-height: 220px;
   overflow: hidden;
@@ -642,6 +646,9 @@ h2 {
 .bow--top { top: 2px; transform: rotate(90deg); }
 .bow--bottom { bottom: 2px; transform: rotate(-90deg); }
 .boundary-caption { margin: 0; max-width: 42em; }
+@media (max-width: 560px) {
+  .boundary-view { aspect-ratio: 4 / 3; min-height: 0; }
+}
 
 /* ── Дом Якумо ── */
 .chain {
@@ -890,8 +897,11 @@ h2 {
 }
 .shot { grid-column: span 3; display: grid; align-content: start; gap: 10px; margin: 0; }
 .shot--wide { grid-column: span 6; }
-.shot figcaption { display: grid; gap: 3px; font-size: var(--fs-sm); line-height: 1.45; text-wrap: pretty; }
+/* Подпись — обычный текст: в grid каждый японский фрагмент стал бы отдельной строкой */
+.shot figcaption { font-size: var(--fs-sm); line-height: 1.45; text-wrap: pretty; }
 .shot-game {
+  display: block;
+  margin-bottom: 3px;
   font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: .08em;
@@ -1272,7 +1282,7 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари и глаза сукимы">
         <img src="img/fan-umbrella-eyes.webp" width="429" height="600" decoding="async" fetchpriority="high" alt="Юкари с зонтиком, вокруг неё разрывы с красными глазами">
       </button>
-      <figcaption><span class="fan-cap">Юкари и глаза сукимы</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Юкари и глаза сукимы</span> <span class="fan-credit">Автор: <a href="https://www.pixiv.net/users/429883" rel="noopener" target="_blank">菊月</a></span></figcaption>
     </figure>
   </div>
   <figure class="sukima" id="sukima">
@@ -1335,13 +1345,13 @@ h2 {
           <button type="button" class="shot-open" aria-label="Открыть крупнее: Фиолетовое платье">
             <img src="img/fan-dress-sm.webp" data-full="img/fan-dress.webp" width="906" height="1280" decoding="async" loading="lazy" alt="Юкари в фиолетовом платье с белыми оборками и в чепце с красной лентой">
           </button>
-          <figcaption><span class="fan-cap">Фиолетовое платье</span> <span class="fan-credit">Автор не указан</span></figcaption>
+          <figcaption><span class="fan-cap">Фиолетовое платье</span> <span class="fan-credit">Автор: <a href="https://www.pixiv.net/users/28985451" rel="noopener" target="_blank">momendoufu</a></span></figcaption>
         </figure>
         <figure class="fan fan--looks">
           <button type="button" class="shot-open" aria-label="Открыть крупнее: Табард даоса">
             <img src="img/fan-tabard-sm.webp" data-full="img/fan-tabard.webp" width="1280" height="1219" decoding="async" loading="lazy" alt="Юкари в фиолетовом табарде с оранжевым низом, с зонтиком в руке">
           </button>
-          <figcaption><span class="fan-cap">Табард даоса</span> <span class="fan-credit">Автор не указан</span></figcaption>
+          <figcaption><span class="fan-cap">Табард даоса</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/10195864" rel="noopener" target="_blank">monadmandara</a></span></figcaption>
         </figure>
       </div>
       </div>
@@ -1553,7 +1563,7 @@ h2 {
     <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари, Ран и Чен">
       <img src="img/fan-family-three-sm.webp" data-full="img/fan-family-three.webp" width="736" height="1041" decoding="async" loading="lazy" alt="Семья Якумо: Юкари стоит, рядом девятихвостая Ран и Чен с кошачьими ушами">
     </button>
-    <figcaption><span class="fan-cap">Юкари, Ран и Чен</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    <figcaption><span class="fan-cap">Юкари, Ран и Чен</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/10275913" rel="noopener" target="_blank">murasaki atsushi</a></span></figcaption>
   </figure>
   </div>
 
@@ -1743,13 +1753,13 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Зонтик и небо">
         <img src="img/fan-parasol-sky-sm.webp" data-full="img/fan-parasol-sky.webp" width="1119" height="1600" decoding="async" loading="lazy" alt="Юкари с фиолетовым зонтиком стоит на траве под голубым небом">
       </button>
-      <figcaption><span class="fan-cap">Зонтик и небо</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Зонтик и небо</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/4706891" rel="noopener" target="_blank">iranon (new_iranon)</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Диван посреди сукимы">
         <img src="img/fan-couch-eyes-sm.webp" data-full="img/fan-couch-eyes.webp" width="1280" height="1000" decoding="async" loading="lazy" alt="Юкари раскинулась на диване, вокруг фиолетовая пустота с глазами">
       </button>
-      <figcaption><span class="fan-cap">Диван посреди сукимы</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Диван посреди сукимы</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/11223638" rel="noopener" target="_blank">shgngzhngdeyti1</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Под большим зонтом">
@@ -1773,7 +1783,7 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Карандашный набросок">
         <img src="img/fan-pencil-1-sm.webp" data-full="img/fan-pencil-1.webp" width="990" height="1280" decoding="async" loading="lazy" alt="Карандашный набросок Юкари в чепце">
       </button>
-      <figcaption><span class="fan-cap">Карандашный набросок</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Карандашный набросок</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/11408045" rel="noopener" target="_blank">efukei</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Тысячелетнее сакэ подождёт">
@@ -1791,7 +1801,7 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Очень близко">
         <img src="img/fan-close-sm.webp" data-full="img/fan-close.webp" width="736" height="981" decoding="async" loading="lazy" alt="Юкари и Ран почти касаются лицами">
       </button>
-      <figcaption><span class="fan-cap">Очень близко</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Очень близко</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/8814295" rel="noopener" target="_blank">eneshi</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: 幻巣「飛光虫ネスト」 глазами художника">
@@ -1803,7 +1813,7 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Коса и табард">
         <img src="img/fan-braid-sm.webp" data-full="img/fan-braid.webp" width="1066" height="1280" decoding="async" loading="lazy" alt="Юкари в табарде даоса с косой, светлый фон">
       </button>
-      <figcaption><span class="fan-cap">Коса и табард</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Коса и табард</span> <span class="fan-credit">Автор: <a href="https://www.zerochan.net/4382585" rel="noopener" target="_blank">minusT</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Осень, бамбук и скамейка">
@@ -1815,13 +1825,13 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Платье и глаза">
         <img src="img/fan-eyes-dress-sm.webp" data-full="img/fan-eyes-dress.webp" width="874" height="1241" decoding="async" loading="lazy" alt="Юкари в фиолетовом платье, за ней разрывы с глазами">
       </button>
-      <figcaption><span class="fan-cap">Платье и глаза</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Платье и глаза</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/4044306" rel="noopener" target="_blank">gunnjou yosio</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Чёрное, белое и красное">
         <img src="img/fan-red-circle-sm.webp" data-full="img/fan-red-circle.webp" width="1280" height="1237" decoding="async" loading="lazy" alt="Чёрно-белая Юкари на фоне красного круга">
       </button>
-      <figcaption><span class="fan-cap">Чёрное, белое и красное</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Чёрное, белое и красное</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/12099799" rel="noopener" target="_blank">ichizen (o_tori)</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: В тёмно-синем">
@@ -1833,37 +1843,37 @@ h2 {
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Подмигивает">
         <img src="img/fan-pale-wink-sm.webp" data-full="img/fan-pale-wink.webp" width="961" height="1280" decoding="async" loading="lazy" alt="Бледная Юкари со скрещёнными руками подмигивает">
       </button>
-      <figcaption><span class="fan-cap">Подмигивает</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Подмигивает</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/11159627" rel="noopener" target="_blank">mochigumo</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Со спины">
         <img src="img/fan-back-sm.webp" data-full="img/fan-back.webp" width="1200" height="1454" decoding="async" loading="lazy" alt="Юкари со спины, табард с узорами">
       </button>
-      <figcaption><span class="fan-cap">Со спины</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Со спины</span> <span class="fan-credit">Автор: <a href="https://www.zerochan.net/4381025" rel="noopener" target="_blank">minusT</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Портрет карандашом">
         <img src="img/fan-pencil-2-sm.webp" data-full="img/fan-pencil-2.webp" width="1072" height="1280" decoding="async" loading="lazy" alt="Карандашный портрет Юкари, подперевшей щёку рукой">
       </button>
-      <figcaption><span class="fan-cap">Портрет карандашом</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Портрет карандашом</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/11179047" rel="noopener" target="_blank">0002koko</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Ран, сикигами Юкари">
         <img src="img/fan-ran-1-sm.webp" data-full="img/fan-ran-1.webp" width="736" height="997" decoding="async" loading="lazy" alt="Ран Якумо среди своих девяти хвостов">
       </button>
-      <figcaption><span class="fan-cap">Ран, сикигами Юкари</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Ран, сикигами Юкари</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/10745674" rel="noopener" target="_blank">tanaka shoushou fumimaro</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: За веером">
         <img src="img/fan-pink-fan-sm.webp" data-full="img/fan-pink-fan.webp" width="1031" height="1280" decoding="async" loading="lazy" alt="Юкари в розовых тонах прикрывает лицо веером">
       </button>
-      <figcaption><span class="fan-cap">За веером</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">За веером</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/10998823" rel="noopener" target="_blank">mochigumo</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Ран улыбается">
         <img src="img/fan-ran-2-sm.webp" data-full="img/fan-ran-2.webp" width="736" height="1097" decoding="async" loading="lazy" alt="Ран Якумо улыбается, девять хвостов за спиной">
       </button>
-      <figcaption><span class="fan-cap">Ран улыбается</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      <figcaption><span class="fan-cap">Ран улыбается</span> <span class="fan-credit">Автор: <a href="https://danbooru.donmai.us/posts/10076888" rel="noopener" target="_blank">tanaka shoushou fumimaro</a></span></figcaption>
     </figure>
     <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари обнимает Ран">
@@ -4427,11 +4437,12 @@ function initNav() {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
       for (const a of links) a.removeAttribute('aria-current');
+      // На первом экране ни один пункт меню не подсвечен.
       const link = byId.get(entry.target.id);
       if (link) link.setAttribute('aria-current', 'true');
     }
   }, { rootMargin: '-45% 0px -50% 0px' });
-  for (const id of byId.keys()) {
+  for (const id of [...byId.keys(), 'top']) {
     const section = document.getElementById(id);
     if (section) observer.observe(section);
   }
