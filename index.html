@@ -1015,7 +1015,11 @@ h2 {
 .folklore-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 280px)); gap: 24px 20px; align-items: start; }
 
 /* Видео: обложка с кнопкой, по нажатию — плеер того же размера */
-.video { max-width: 640px; }
+.videos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+.vid { display: grid; align-content: start; gap: 10px; margin: 0; }
+.vid figcaption { font-size: var(--fs-sm); line-height: 1.45; color: var(--ink); text-wrap: pretty; }
+.vid-channel { display: block; margin-top: 4px; font-size: var(--fs-xs); color: var(--ink-2); }
+@media (max-width: 700px) { .videos { grid-template-columns: minmax(0, 1fr); } }
 .video-open, .video-frame {
   display: block;
   width: 100%;
@@ -1735,15 +1739,42 @@ h2 {
 
   <div class="subsection listen">
     <h3>Послушать</h3>
-    <p class="subsection-lede">У Necrofantasia сотни аранжировок. Эта — «NECROMANCIA» кружка SOUND HOLIC: ню-метал, аранжировщик バルツ (Barutsu), альбом <span lang="ja">魂魄 -KONPAKU-</span> 2017 года.</p>
-    <div class="video">
-      <a class="video-open" href="https://www.youtube.com/watch?v=3aCG1YycPso" data-yt="3aCG1YycPso" target="_blank" rel="noopener" aria-label="Смотреть видео: NECROMANCIA, SOUND HOLIC">
-        <img src="https://i.ytimg.com/vi/3aCG1YycPso/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="">
-        <span class="video-play" aria-hidden="true"></span>
-        <span class="video-title">NECROMANCIA · SOUND HOLIC</span>
-      </a>
+    <p class="subsection-lede">Necrofantasia, тема Юкари, — одна из самых аранжируемых мелодий Тохо. Вот четыре версии от метала до евробита.</p>
+    <div class="videos">
+      <figure class="vid">
+        <a class="video-open" href="https://www.youtube.com/watch?v=3aCG1YycPso" data-yt="3aCG1YycPso" target="_blank" rel="noopener" aria-label="Смотреть видео: NECROMANCIA, SOUND HOLIC">
+          <img src="https://i.ytimg.com/vi/3aCG1YycPso/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="video-title">NECROMANCIA · SOUND HOLIC</span>
+        </a>
+        <figcaption>Ню-метал по Necrofantasia. Аранжировка バルツ, альбом <span lang="ja">魂魄 -KONPAKU-</span> (2017). <a class="vid-channel" href="https://www.youtube.com/watch?v=3aCG1YycPso" target="_blank" rel="noopener">Открыть на YouTube · канал Kappashiro</a></figcaption>
+      </figure>
+      <figure class="vid">
+        <a class="video-open" href="https://www.youtube.com/watch?v=MPivMDb6uXc" data-yt="MPivMDb6uXc" target="_blank" rel="noopener" aria-label="Смотреть видео: Deadly Fantasy, Odyssey &amp; The DNA Team">
+          <img src="https://i.ytimg.com/vi/MPivMDb6uXc/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="video-title">Deadly Fantasy · Odyssey &amp; The DNA Team</span>
+        </a>
+        <figcaption>Евробит с английским вокалом по Necrofantasia, 2012. Длинная версия от T.J. Thornberry. <a class="vid-channel" href="https://www.youtube.com/watch?v=MPivMDb6uXc" target="_blank" rel="noopener">Открыть на YouTube · канал Tewifying</a></figcaption>
+      </figure>
+      <figure class="vid">
+        <a class="video-open" href="https://www.youtube.com/watch?v=xJUQy6kdSUk" data-yt="xJUQy6kdSUk" target="_blank" rel="noopener" aria-label="Смотреть видео: Catch Us, A-One">
+          <img src="https://i.ytimg.com/vi/xJUQy6kdSUk/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="video-title">Catch Us · A-One</span>
+        </a>
+        <figcaption>Евробит с английским вокалом: Necrofantasia вместе с музыкой Phantasm-уровня <span lang="ja">妖々跋扈 ～ Who done it!</span> Альбом TOHO EUROBEAT VOL.15 <span lang="ja">妖々夢</span> (2017). <a class="vid-channel" href="https://www.youtube.com/watch?v=xJUQy6kdSUk" target="_blank" rel="noopener">Открыть на YouTube · канал Tenshi Hinanawi</a></figcaption>
+      </figure>
+      <figure class="vid">
+        <a class="video-open" href="https://www.youtube.com/watch?v=sxrOyFJNHw8" data-yt="sxrOyFJNHw8" target="_blank" rel="noopener" aria-label="Смотреть видео: Like a border, A-One">
+          <img src="https://i.ytimg.com/vi/sxrOyFJNHw8/hqdefault.jpg" width="480" height="360" loading="lazy" decoding="async" alt="">
+          <span class="video-play" aria-hidden="true"></span>
+          <span class="video-title">Like a border · A-One</span>
+        </a>
+        <figcaption>Евробит по <span lang="ja">夢と現の境界</span> — музыке «Клуба секретной печати» о границе сна и яви, той самой, что в <span lang="ja">結界「夢と現の呪」</span>. Вокал まめみ, альбом TOHO EUROBEAT <span lang="ja">秘</span> (2016). <a class="vid-channel" href="https://www.youtube.com/watch?v=sxrOyFJNHw8" target="_blank" rel="noopener">Открыть на YouTube · канал Shoop Touhou Eurobeat</a></figcaption>
+      </figure>
     </div>
-    <p class="hint">Видео с YouTube (загрузил канал Kappashiro); плеер подгружается только после нажатия. Если YouTube просит войти и не пускает, <a href="https://www.youtube.com/watch?v=3aCG1YycPso" target="_blank" rel="noopener">откройте видео на самом YouTube</a>. Поддержать кружок: <a href="https://sound-holic.booth.pm/items/3242237">альбом на BOOTH</a>, <a href="https://open.spotify.com/track/0kLxLyi2HfVEDeWS6j2WQK">трек на Spotify</a>.</p>
+    <p class="hint">Плеер YouTube подгружается только после нажатия. Если YouTube просит войти и не пускает, нажмите «Открыть на YouTube» под роликом. Поддержать музыкантов: <a href="https://sound-holic.booth.pm/items/3242237">SOUND HOLIC на BOOTH</a>, <a href="https://odysseymusic.bandcamp.com/album/deadly-fantasy-single">Odyssey на Bandcamp</a>.</p>
   </div>
 
   <div class="subsection maribel">
