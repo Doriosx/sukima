@@ -13,10 +13,7 @@
 <meta property="og:url" content="https://doriosx.github.io/sukima/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oranienbaum&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ysabeau+Office:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;800&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Oranienbaum&family=Shippori+Mincho+B1:wght@500;800&family=Ysabeau+Office:wght@400;600;700&display=swap">
 <style>
 /* ── 00-base.css ── */
 /* Токены. Светлая тема — «эта сторона» (бумага цвета белой глицинии),
@@ -1005,7 +1002,7 @@ h2 {
 }
 
 /* Клубный фольклор в «Мелочах» */
-.folklore .fan { max-width: 300px; }
+.folklore-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 280px)); gap: 24px 20px; align-items: start; }
 
 /* ── 30-arcade.css ── */
 /* Игровое поле живёт в своём мире: тёмный экран в обеих темах,
@@ -1273,7 +1270,7 @@ h2 {
     <p class="hero-jp" lang="ja" aria-hidden="true">八雲紫</p>
     <figure class="fan fan--hero">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари и глаза сукимы">
-        <img src="img/fan-umbrella-eyes.webp" width="429" height="600" decoding="async" alt="Юкари с зонтиком, вокруг неё разрывы с красными глазами">
+        <img src="img/fan-umbrella-eyes.webp" width="429" height="600" decoding="async" fetchpriority="high" alt="Юкари с зонтиком, вокруг неё разрывы с красными глазами">
       </button>
       <figcaption><span class="fan-cap">Юкари и глаза сукимы</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
@@ -1336,13 +1333,13 @@ h2 {
       <div class="outfits">
         <figure class="fan fan--looks">
           <button type="button" class="shot-open" aria-label="Открыть крупнее: Фиолетовое платье">
-            <img src="img/fan-dress.webp" width="566" height="800" decoding="async" loading="lazy" alt="Юкари в фиолетовом платье с белыми оборками и в чепце с красной лентой">
+            <img src="img/fan-dress-sm.webp" data-full="img/fan-dress.webp" width="906" height="1280" decoding="async" loading="lazy" alt="Юкари в фиолетовом платье с белыми оборками и в чепце с красной лентой">
           </button>
           <figcaption><span class="fan-cap">Фиолетовое платье</span> <span class="fan-credit">Автор не указан</span></figcaption>
         </figure>
         <figure class="fan fan--looks">
           <button type="button" class="shot-open" aria-label="Открыть крупнее: Табард даоса">
-            <img src="img/fan-tabard.webp" width="800" height="762" decoding="async" loading="lazy" alt="Юкари в фиолетовом табарде с оранжевым низом, с зонтиком в руке">
+            <img src="img/fan-tabard-sm.webp" data-full="img/fan-tabard.webp" width="1280" height="1219" decoding="async" loading="lazy" alt="Юкари в фиолетовом табарде с оранжевым низом, с зонтиком в руке">
           </button>
           <figcaption><span class="fan-cap">Табард даоса</span> <span class="fan-credit">Автор не указан</span></figcaption>
         </figure>
@@ -1395,37 +1392,37 @@ h2 {
   <div class="gallery">
     <figure class="shot">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Imperishable Night">
-        <img src="img/gallery-in-lastspell.webp" width="640" height="480" loading="lazy" decoding="async" alt="Imperishable Night: полупрозрачный портрет Юкари поверх игрового поля, внизу название заклинания">
+        <img src="img/gallery-in-lastspell-sm.webp" data-full="img/gallery-in-lastspell.webp" width="640" height="480" loading="lazy" decoding="async" alt="Imperishable Night: полупрозрачный портрет Юкари поверх игрового поля, внизу название заклинания">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方永夜抄</span> · 2004</span>Юкари играет в паре с Рейму. Последнее заклинание команды — <span lang="ja">境界「永夜四重結界」</span>, за ним виден её портрет.</figcaption>
     </figure>
     <figure class="shot">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Immaterial and Missing Power">
-        <img src="img/gallery-iamp-signs.webp" width="640" height="480" loading="lazy" decoding="async" alt="Immaterial and Missing Power: две Юкари с зонтиками, одна выставляет дорожные знаки">
+        <img src="img/gallery-iamp-signs-sm.webp" data-full="img/gallery-iamp-signs.webp" width="640" height="480" loading="lazy" decoding="async" alt="Immaterial and Missing Power: две Юкари с зонтиками, одна выставляет дорожные знаки">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方萃夢想</span> · 2004</span>Зеркальный бой: Юкари против Юкари. Среди её приёмов есть дорожные знаки.</figcaption>
     </figure>
     <figure class="shot">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Scarlet Weather Rhapsody">
-        <img src="img/gallery-swr-ran.webp" width="640" height="480" loading="lazy" decoding="async" alt="Scarlet Weather Rhapsody: Юкари в фиолетовом платье, рядом с ней летит девятихвостая Ран">
+        <img src="img/gallery-swr-ran-sm.webp" data-full="img/gallery-swr-ran.webp" width="640" height="480" loading="lazy" decoding="async" alt="Scarlet Weather Rhapsody: Юкари в фиолетовом платье, рядом с ней летит девятихвостая Ран">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方緋想天</span> · 2008</span><span lang="ja">式神「八雲藍」</span>: Юкари вызывает на поле Ран.</figcaption>
     </figure>
     <figure class="shot">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Hisoutensoku">
-        <img src="img/gallery-soku-laplace.webp" width="640" height="480" loading="lazy" decoding="async" alt="Hisoutensoku: по полю висят тёмные разрывы с глазами, из них летят снаряды">
+        <img src="img/gallery-soku-laplace-sm.webp" data-full="img/gallery-soku-laplace.webp" width="640" height="480" loading="lazy" decoding="async" alt="Hisoutensoku: по полю висят тёмные разрывы с глазами, из них летят снаряды">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方非想天則</span> · 2009</span><span lang="ja">魔眼「ラプラスの魔」</span>: глаза из щелей по всему полю стреляют вслед за атаками Юкари.</figcaption>
     </figure>
     <figure class="shot shot--wide">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: поезд в Antinomy of Common Flowers">
-        <img src="img/gallery-aocf-train.webp" width="960" height="540" loading="lazy" decoding="async" alt="Antinomy of Common Flowers: электричка с зелёной полосой проносится через поле, перед ней Юкари">
+        <img src="img/gallery-aocf-train-sm.webp" data-full="img/gallery-aocf-train.webp" width="960" height="540" loading="lazy" decoding="async" alt="Antinomy of Common Flowers: электричка с зелёной полосой проносится через поле, перед ней Юкари">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方憑依華</span> · 2017</span>Тот самый <span lang="ja">廃線</span>. Поезд теперь другой, серии JR 103.</figcaption>
     </figure>
     <figure class="shot shot--wide">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: бой с Рейму в Antinomy of Common Flowers">
-        <img src="img/gallery-aocf-eyes.webp" width="960" height="535" loading="lazy" decoding="async" alt="Antinomy of Common Flowers: Юкари с веером справа, Рейму слева, между ними пули в форме глаз">
+        <img src="img/gallery-aocf-eyes-sm.webp" data-full="img/gallery-aocf-eyes.webp" width="960" height="535" loading="lazy" decoding="async" alt="Antinomy of Common Flowers: Юкари с веером справа, Рейму слева, между ними пули в форме глаз">
       </button>
       <figcaption><span class="shot-game"><span lang="ja">東方憑依華</span> · 2017</span>Сюжетный бой: Юкари с веером против Рейму, пули в форме глаз.</figcaption>
     </figure>
@@ -1553,10 +1550,10 @@ h2 {
     </li>
   </ol>
   <figure class="fan fan--family">
-    <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари и Ран">
-      <img src="img/fan-yukari-ran.webp" width="675" height="900" decoding="async" loading="lazy" alt="Юкари обнимает Ран сзади, у Ран шапка с талисманами">
+    <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари, Ран и Чен">
+      <img src="img/fan-family-three-sm.webp" data-full="img/fan-family-three.webp" width="720" height="960" decoding="async" loading="lazy" alt="Семья Якумо: Юкари стоит, рядом девятихвостая Ран и Чен с кошачьими ушами">
     </button>
-    <figcaption><span class="fan-cap">Юкари и Ран</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    <figcaption><span class="fan-cap">Юкари, Ран и Чен</span> <span class="fan-credit">Автор не указан</span></figcaption>
   </figure>
   </div>
 
@@ -1685,12 +1682,26 @@ h2 {
   <div class="subsection folklore">
     <h3>Клубный фольклор</h3>
     <p class="subsection-lede">Что пишут в клубном чате, когда кончаются серьёзные темы.</p>
-    <figure class="fan fan--memes">
-      <button type="button" class="shot-open" aria-label="Открыть крупнее: Клубная мудрость">
-        <img src="img/fan-meme-bratva.webp" width="500" height="500" decoding="async" loading="lazy" alt="Мем: белые буквы на чёрном — «Братву на сиськи Юкари меняю»">
-      </button>
-      <figcaption><span class="fan-cap">Клубная мудрость</span> <span class="fan-credit">Автор не указан</span></figcaption>
-    </figure>
+    <div class="folklore-row">
+      <figure class="fan fan--memes">
+        <button type="button" class="shot-open" aria-label="Открыть крупнее: Клубная мудрость">
+          <img src="img/fan-meme-bratva.webp" width="500" height="500" decoding="async" loading="lazy" alt="Мем: белые буквы на чёрном — «Братву на сиськи Юкари меняю»">
+        </button>
+        <figcaption><span class="fan-cap">Клубная мудрость</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      </figure>
+      <figure class="fan fan--memes">
+        <button type="button" class="shot-open" aria-label="Открыть крупнее: «Ран, что делать… экран какой-то странный стал»">
+          <img src="img/fan-computer.webp" width="634" height="900" decoding="async" loading="lazy" alt="Юкари в слезах показывает на монитор, рядом надпись по-японски: «Что делать, Ран, экран стал какой-то странный»">
+        </button>
+        <figcaption><span class="fan-cap">«Ран, что делать… экран какой-то странный стал»</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      </figure>
+      <figure class="fan fan--memes">
+        <button type="button" class="shot-open" aria-label="Открыть крупнее: Запасы на зимнюю спячку">
+          <img src="img/fan-supermarket-sm.webp" data-full="img/fan-supermarket.webp" width="736" height="981" decoding="async" loading="lazy" alt="Косплей Юкари в супермаркете с тележкой, полной хлеба">
+        </button>
+        <figcaption><span class="fan-cap">Запасы на зимнюю спячку</span> <span class="fan-credit">Автор не указан</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
     <div class="seam" aria-hidden="true"><i></i></div>
@@ -1704,64 +1715,136 @@ h2 {
 
   <div class="wall">
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Зонтик и небо">
+        <img src="img/fan-parasol-sky-sm.webp" data-full="img/fan-parasol-sky.webp" width="1119" height="1600" decoding="async" loading="lazy" alt="Юкари с фиолетовым зонтиком стоит на траве под голубым небом">
+      </button>
+      <figcaption><span class="fan-cap">Зонтик и небо</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Диван посреди сукимы">
-        <img src="img/fan-couch-eyes.webp" width="1000" height="781" decoding="async" loading="lazy" alt="Юкари раскинулась на диване, вокруг фиолетовая пустота с глазами">
+        <img src="img/fan-couch-eyes-sm.webp" data-full="img/fan-couch-eyes.webp" width="1280" height="1000" decoding="async" loading="lazy" alt="Юкари раскинулась на диване, вокруг фиолетовая пустота с глазами">
       </button>
       <figcaption><span class="fan-cap">Диван посреди сукимы</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Под большим зонтом">
+        <img src="img/fan-big-umbrella-sm.webp" data-full="img/fan-big-umbrella.webp" width="900" height="1275" decoding="async" loading="lazy" alt="Юкари полулежит под огромным бумажным зонтом">
+      </button>
+      <figcaption><span class="fan-cap">Под большим зонтом</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: С дорожным знаком, как в 萃夢想">
-        <img src="img/fan-road-sign.webp" width="1000" height="637" decoding="async" loading="lazy" alt="Юкари с зонтиком и дорожными знаками">
+        <img src="img/fan-road-sign-sm.webp" data-full="img/fan-road-sign.webp" width="1600" height="1020" decoding="async" loading="lazy" alt="Юкари с зонтиком и дорожными знаками">
       </button>
       <figcaption><span class="fan-cap">С дорожным знаком, как в 萃夢想</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Улыбка">
+        <img src="img/fan-smile.webp" width="600" height="900" decoding="async" loading="lazy" alt="Крупный план: Юкари улыбается, фиолетовые глаза">
+      </button>
+      <figcaption><span class="fan-cap">Улыбка</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Карандашный набросок">
-        <img src="img/fan-pencil-1.webp" width="773" height="1000" decoding="async" loading="lazy" alt="Карандашный набросок Юкари в чепце">
+        <img src="img/fan-pencil-1-sm.webp" data-full="img/fan-pencil-1.webp" width="990" height="1280" decoding="async" loading="lazy" alt="Карандашный набросок Юкари в чепце">
       </button>
       <figcaption><span class="fan-cap">Карандашный набросок</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Тысячелетнее сакэ подождёт">
+        <img src="img/fan-bar-sm.webp" data-full="img/fan-bar.webp" width="1200" height="990" decoding="async" loading="lazy" alt="Юкари за барной стойкой среди бутылок">
+      </button>
+      <figcaption><span class="fan-cap">Тысячелетнее сакэ подождёт</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: В майке «YAKUMO»">
-        <img src="img/fan-yakumo-shirt.webp" width="1000" height="1000" decoding="async" loading="lazy" alt="Юкари в фиолетовой майке с надписью YAKUMO и чёрной куртке">
+        <img src="img/fan-yakumo-shirt-sm.webp" data-full="img/fan-yakumo-shirt.webp" width="1280" height="1280" decoding="async" loading="lazy" alt="Юкари в фиолетовой майке с надписью YAKUMO и чёрной куртке">
       </button>
       <figcaption><span class="fan-cap">В майке «YAKUMO»</span> <span class="fan-credit">Автор: DRIPSOKYO</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Очень близко">
+        <img src="img/fan-close-sm.webp" data-full="img/fan-close.webp" width="736" height="981" decoding="async" loading="lazy" alt="Юкари и Ран почти касаются лицами">
+      </button>
+      <figcaption><span class="fan-cap">Очень близко</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Веер, сукимы и бабочки">
-        <img src="img/fan-gaps-butterflies.webp" width="1000" height="728" decoding="async" loading="lazy" alt="Юкари с веером среди разрывов и светящихся бабочек">
+        <img src="img/fan-gaps-butterflies-sm.webp" data-full="img/fan-gaps-butterflies.webp" width="1200" height="874" decoding="async" loading="lazy" alt="Юкари с веером среди разрывов и светящихся бабочек">
       </button>
       <figcaption><span class="fan-cap">Веер, сукимы и бабочки</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Коса и табард">
+        <img src="img/fan-braid-sm.webp" data-full="img/fan-braid.webp" width="1066" height="1280" decoding="async" loading="lazy" alt="Юкари в табарде даоса с косой, светлый фон">
+      </button>
+      <figcaption><span class="fan-cap">Коса и табард</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Осень, бамбук и скамейка">
-        <img src="img/fan-autumn-bench.webp" width="708" height="1000" decoding="async" loading="lazy" alt="Юкари сидит на скамейке среди красных листьев и бамбука">
+        <img src="img/fan-autumn-bench-sm.webp" data-full="img/fan-autumn-bench.webp" width="736" height="1040" decoding="async" loading="lazy" alt="Юкари сидит на скамейке среди красных листьев и бамбука">
       </button>
       <figcaption><span class="fan-cap">Осень, бамбук и скамейка</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Платье и глаза">
+        <img src="img/fan-eyes-dress-sm.webp" data-full="img/fan-eyes-dress.webp" width="874" height="1241" decoding="async" loading="lazy" alt="Юкари в фиолетовом платье, за ней разрывы с глазами">
+      </button>
+      <figcaption><span class="fan-cap">Платье и глаза</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Чёрное, белое и красное">
-        <img src="img/fan-red-circle.webp" width="1000" height="966" decoding="async" loading="lazy" alt="Чёрно-белая Юкари на фоне красного круга">
+        <img src="img/fan-red-circle-sm.webp" data-full="img/fan-red-circle.webp" width="1280" height="1237" decoding="async" loading="lazy" alt="Чёрно-белая Юкари на фоне красного круга">
       </button>
       <figcaption><span class="fan-cap">Чёрное, белое и красное</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: В тёмно-синем">
+        <img src="img/fan-navy-sm.webp" data-full="img/fan-navy.webp" width="736" height="1041" decoding="async" loading="lazy" alt="Юкари в тёмно-синем платье с поясом, в руке зонтик">
+      </button>
+      <figcaption><span class="fan-cap">В тёмно-синем</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Подмигивает">
-        <img src="img/fan-pale-wink.webp" width="751" height="1000" decoding="async" loading="lazy" alt="Бледная Юкари со скрещёнными руками подмигивает">
+        <img src="img/fan-pale-wink-sm.webp" data-full="img/fan-pale-wink.webp" width="961" height="1280" decoding="async" loading="lazy" alt="Бледная Юкари со скрещёнными руками подмигивает">
       </button>
       <figcaption><span class="fan-cap">Подмигивает</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Со спины">
+        <img src="img/fan-back-sm.webp" data-full="img/fan-back.webp" width="1200" height="1454" decoding="async" loading="lazy" alt="Юкари со спины, табард с узорами">
+      </button>
+      <figcaption><span class="fan-cap">Со спины</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: Портрет карандашом">
-        <img src="img/fan-pencil-2.webp" width="838" height="1000" decoding="async" loading="lazy" alt="Карандашный портрет Юкари, подперевшей щёку рукой">
+        <img src="img/fan-pencil-2-sm.webp" data-full="img/fan-pencil-2.webp" width="1072" height="1280" decoding="async" loading="lazy" alt="Карандашный портрет Юкари, подперевшей щёку рукой">
       </button>
       <figcaption><span class="fan-cap">Портрет карандашом</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
     <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Ран, сикигами Юкари">
+        <img src="img/fan-ran-1-sm.webp" data-full="img/fan-ran-1.webp" width="736" height="997" decoding="async" loading="lazy" alt="Ран Якумо среди своих девяти хвостов">
+      </button>
+      <figcaption><span class="fan-cap">Ран, сикигами Юкари</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
       <button type="button" class="shot-open" aria-label="Открыть крупнее: За веером">
-        <img src="img/fan-pink-fan.webp" width="805" height="1000" decoding="async" loading="lazy" alt="Юкари в розовых тонах прикрывает лицо веером">
+        <img src="img/fan-pink-fan-sm.webp" data-full="img/fan-pink-fan.webp" width="1031" height="1280" decoding="async" loading="lazy" alt="Юкари в розовых тонах прикрывает лицо веером">
       </button>
       <figcaption><span class="fan-cap">За веером</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Ран улыбается">
+        <img src="img/fan-ran-2-sm.webp" data-full="img/fan-ran-2.webp" width="736" height="1097" decoding="async" loading="lazy" alt="Ран Якумо улыбается, девять хвостов за спиной">
+      </button>
+      <figcaption><span class="fan-cap">Ран улыбается</span> <span class="fan-credit">Автор не указан</span></figcaption>
+    </figure>
+    <figure class="fan fan--wall">
+      <button type="button" class="shot-open" aria-label="Открыть крупнее: Юкари обнимает Ран">
+        <img src="img/fan-yukari-ran-sm.webp" data-full="img/fan-yukari-ran.webp" width="960" height="1280" decoding="async" loading="lazy" alt="Юкари обнимает Ран сзади, у Ран шапка с талисманами">
+      </button>
+      <figcaption><span class="fan-cap">Юкари обнимает Ран</span> <span class="fan-credit">Автор не указан</span></figcaption>
     </figure>
   </div>
   <p class="hint">Рисунки принадлежат их авторам. Если вы автор и хотите подпись, ссылку или чтобы рисунок убрали, напишите в <a href="https://github.com/Doriosx/sukima/issues">Issues репозитория сайта</a>.</p>
@@ -3972,12 +4055,16 @@ function initGallery() {
   const img = $('#lightbox-img');
   const cap = $('#lightbox-cap');
 
+  let isArt = false;
   const fit = () => {
     const w = img.naturalWidth;
     const hgt = img.naturalHeight;
     if (!w || !hgt) return;
-    const width = Math.min(window.innerWidth * 0.92, ((window.innerHeight * 0.9 - 90) * w) / hgt, w * 2);
-    img.classList.toggle('is-pixel', w <= 640);
+    // Скриншоты игр — пиксельная графика: их можно увеличить вдвое без сглаживания.
+    // Рисунки фанатов не увеличиваем больше натурального размера, иначе они мылятся.
+    const maxScale = isArt ? 1 : 2;
+    const width = Math.min(window.innerWidth * 0.92, ((window.innerHeight * 0.9 - 90) * w) / hgt, w * maxScale);
+    img.classList.toggle('is-pixel', !isArt && w <= 640);
     img.style.width = Math.max(200, Math.floor(width)) + 'px';
   };
   img.addEventListener('load', fit);
@@ -3987,7 +4074,8 @@ function initGallery() {
     btn.addEventListener('click', () => {
       const pic = btn.querySelector('img');
       const caption = btn.closest('figure')?.querySelector('figcaption');
-      img.src = pic.src;
+      isArt = Boolean(btn.closest('.fan'));
+      img.src = pic.dataset.full || pic.currentSrc || pic.src;
       img.alt = pic.alt;
       const parts = caption ? [...caption.querySelectorAll('.fan-cap, .fan-credit')].map((n) => n.textContent.trim()) : [];
       cap.textContent = parts.length
