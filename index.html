@@ -265,6 +265,8 @@ b, strong { font-weight: 700; }
   text-transform: none;
 }
 h1, h2, h3 { text-wrap: balance; }
+/* Заголовки получают фокус при переходе из меню — рамка вокруг них не нужна */
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 h2 {
   margin: 0;
   font-family: var(--f-display);
@@ -4566,9 +4568,32 @@ function initNav() {
   }
 }
 
+// Пункты меню прокручивают к разделу, не дописывая #раздел в адресную строку.
+// Прямые ссылки вида …/sukima/#spells по-прежнему открываются на нужном разделе.
+function initAnchors() {
+  for (const a of $$('.masthead a[href^="#"]')) {
+    a.addEventListener('click', (ev) => {
+      const id = a.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      ev.preventDefault();
+      const behavior = reducedMotion.matches ? 'auto' : 'smooth';
+      if (id === 'top') window.scrollTo({ top: 0, behavior });
+      else target.scrollIntoView({ behavior, block: 'start' });
+      // Фокус — на заголовок раздела, чтобы клавиатура и экранные чтецы шли дальше оттуда.
+      const heading = target.querySelector('h1, h2');
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+      }
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    });
+  }
+}
+
 // Скрипт стоит в конце страницы, разметка уже разобрана.
 // Модули запускаются независимо: ошибка в одном не ломает остальные.
-for (const init of [initSukima, initGallery, initVideo, initBoundary, initDanmaku, initTicket, initNav]) {
+for (const init of [initSukima, initGallery, initVideo, initBoundary, initDanmaku, initTicket, initNav, initAnchors]) {
   try {
     init();
   } catch (err) {
