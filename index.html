@@ -12,6 +12,14 @@
 <meta property="og:title" content="Клуб «Сукима»">
 <meta property="og:description" content="Неофициальный фан-сайт о Юкари Якумо из Touhou Project: досье, скриншоты, спелл-карты с мини-игрой, хроника и членский билет.">
 <meta property="og:url" content="https://doriosx.github.io/sukima/">
+<meta property="og:site_name" content="Клуб «Сукима»">
+<meta property="og:image" content="https://doriosx.github.io/sukima/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Клуб «Сукима»: надпись на тёмно-фиолетовом фоне, щель с глазами и рисунок Юкари с зонтиком">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Тема, выбранная на сайте, ставится до отрисовки, чтобы страница не мигала. -->
+<script>try{var t=JSON.parse(localStorage.getItem("sukima:theme"));if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Oranienbaum&family=Shippori+Mincho+B1:wght@500;800&family=Ysabeau+Office:wght@400;600;700&display=swap">
@@ -187,29 +195,102 @@ b, strong { font-weight: 700; }
   line-height: 1;
 }
 .brand-mark { width: 22px; height: 22px; fill: var(--murasaki); flex: none; }
-.nav { display: flex; flex-wrap: wrap; gap: 2px 20px; }
+/* На узком и среднем экране: сверху название и переключатель темы, под ними
+   ряд меню, который прокручивается вбок. Края ряда тают, если за ними
+   есть ещё пункты (классы fade-l / fade-r ставит 90-main.js). */
+.nav {
+  --fade-l: 0px;
+  --fade-r: 0px;
+  order: 2;
+  display: flex;
+  gap: 18px;
+  width: calc(100% + 12px);
+  margin-inline: -6px;
+  padding: 2px 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--fade-l), #000 calc(100% - var(--fade-r)), transparent);
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav.fade-l { --fade-l: 36px; }
+.nav.fade-r { --fade-r: 36px; }
 .nav a {
   color: var(--ink-2);
   text-decoration: none;
+  white-space: nowrap;
   font-size: var(--fs-sm);
   font-weight: 600;
   padding-block: 6px;
   border-bottom: 1px solid transparent;
 }
+.nav a:focus-visible { outline-offset: 1px; }
 .nav a:hover, .nav a[aria-current="true"] { color: var(--murasaki); border-bottom-color: currentColor; }
 
-@media (max-width: 640px) {
-  :root { --header-h: 96px; }
-  .nav {
-    flex-wrap: nowrap;
-    width: 100%;
-    overflow-x: auto;
-    scrollbar-width: none;
-    gap: 18px;
-  }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav a { white-space: nowrap; }
+/* Переключатель темы: круг, разделённый волнистой границей дня и ночи */
+.theme-toggle {
+  order: 1;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--murasaki);
+  cursor: pointer;
 }
+.theme-toggle:hover { background: var(--murasaki-soft); }
+.theme-toggle svg { width: 20px; height: 20px; transition: transform .45s ease; }
+.theme-toggle circle { fill: none; stroke: currentColor; stroke-width: 1.6; }
+.theme-toggle path { fill: currentColor; }
+.theme-toggle[aria-pressed="true"] svg { transform: rotate(180deg); }
+
+@media (max-width: 1099px) {
+  :root { --header-h: 104px; }
+}
+/* На широком экране всё в одну строку */
+@media (min-width: 1100px) {
+  .nav {
+    order: 1;
+    gap: 2px 20px;
+    width: auto;
+    margin-inline: auto 0;
+    padding: 0;
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .theme-toggle { order: 2; margin-left: 0; }
+}
+
+/* Кнопка «наверх» */
+.to-top {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  z-index: 25;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--paper-2) 92%, transparent);
+  color: var(--murasaki);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.to-top.is-shown { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--paper-3); }
+.to-top svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Разделы. Вертикальная японская подпись живёт в левом поле
    и едет вместе с разделом при прокрутке. */
@@ -925,6 +1006,8 @@ h2 {
   background: transparent;
   color: #F1EAF9;
 }
+/* После щелчка по картинке фокус оказывается на самом окне — рамка там не нужна */
+.lightbox:focus-visible { outline: none; }
 .lightbox::backdrop { background: rgba(8, 4, 13, .88); }
 .lightbox-img {
   display: block;
@@ -934,6 +1017,8 @@ h2 {
   box-shadow: 0 0 0 1px rgba(241, 234, 249, .25);
 }
 .lightbox-img.is-pixel { image-rendering: pixelated; }
+/* Горизонтальный свайп листает, вертикальный и щипок остаются браузеру */
+.lightbox-img { touch-action: pan-y pinch-zoom; -webkit-user-select: none; user-select: none; }
 .lightbox-cap { max-width: 44em; margin: 12px auto 0; font-size: var(--fs-sm); line-height: 1.45; text-align: center; color: #E6DCF2; }
 .lightbox-close {
   position: absolute;
@@ -950,8 +1035,32 @@ h2 {
   cursor: pointer;
 }
 .lightbox-close:focus-visible { outline-color: #F1EAF9; }
+.lightbox-cap a { color: #CDB8F0; }
+.lightbox-count { color: #BCA6E6; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-top: -24px;
+  padding: 0 0 4px;
+  border: 1px solid rgba(241, 234, 249, .45);
+  border-radius: 50%;
+  background: rgba(26, 16, 36, .85);
+  color: #F1EAF9;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox-nav:hover { background: #33204A; }
+.lightbox-nav:focus-visible { outline-color: #F1EAF9; }
+.lightbox-prev { left: max(14px, env(safe-area-inset-left, 0px)); }
+.lightbox-next { right: max(14px, env(safe-area-inset-right, 0px)); }
 @media (max-width: 560px) {
   .lightbox-close { top: -46px; right: 0; }
+  .lightbox-nav { top: auto; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); margin-top: 0; }
 }
 
 /* Оригинал карты поверх игрового поля */
@@ -1317,9 +1426,13 @@ h2 {
     <a href="#spells">Спелл-карты</a>
     <a href="#family">Дом Якумо</a>
     <a href="#chronicle">Хроника</a>
+    <a href="#facts">Мелочи</a>
     <a href="#wall">Стена</a>
     <a href="#ticket">Билет</a>
   </nav>
+  <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Переключить тему">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17C16 16 8 8 12 3.5z"/></svg>
+  </button>
 </header>
 <section class="hero" id="top" aria-labelledby="hero-title">
   <div class="hero-head">
@@ -1489,10 +1602,12 @@ h2 {
   </div>
   <p class="hint">Скриншоты игр © Team Shanghai Alice, взяты с Touhou Wiki. ZUN разрешает публиковать скриншоты на сайтах; мы только уменьшаем и обрезаем их, не меняя пропорций и цветов.</p>
 
-  <dialog class="lightbox" id="lightbox" aria-label="Скриншот крупно">
+  <dialog class="lightbox" id="lightbox" aria-label="Картинка крупно">
     <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Закрыть">×</button>
-    <img class="lightbox-img" id="lightbox-img" alt="">
-    <p class="lightbox-cap" id="lightbox-cap"></p>
+    <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Предыдущая картинка">‹</button>
+    <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Следующая картинка">›</button>
+    <img class="lightbox-img" id="lightbox-img" alt="" draggable="false">
+    <p class="lightbox-cap" aria-live="polite"><span class="lightbox-count" id="lightbox-count"></span><span id="lightbox-cap"></span></p>
   </dialog>
 </section>
     <div class="seam" aria-hidden="true"><i></i></div>
@@ -2022,6 +2137,9 @@ h2 {
     <p class="footer-sign">Сайт, как и его героиня, днём спит. Но работает.</p>
   </div>
 </footer>
+  <button type="button" class="to-top" id="to-top" aria-label="Наверх" title="Наверх">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg>
+  </button>
 </div>
 <script>
 (() => {
@@ -4171,19 +4289,25 @@ const PATTERNS = {
 };
 
 // ── 45-gallery.js ──
-// Увеличение картинок в диалоге.
+// Увеличение картинок в диалоге и листание внутри раздела.
 // Сначала показывается превью этой же картинки (оно уже загружено), потом,
 // когда догрузится, — полная версия. Пока новое превью не готово, окно пустое,
 // поэтому прежняя картинка не мелькает. Размер окна считается по размеру полной
 // версии (атрибуты width/height), так что при подмене ничего не прыгает.
 // Скриншоты игр — пиксельная графика: их можно увеличить вдвое без сглаживания.
 // Рисунки фанатов не увеличиваются больше натурального размера, иначе мылятся.
+// Листать: стрелки на экране, ← → на клавиатуре, свайп на телефоне.
 
 function initGallery() {
   const box = $('#lightbox');
   if (!box || typeof box.showModal !== 'function') return;
   const img = $('#lightbox-img');
   const cap = $('#lightbox-cap');
+  const count = $('#lightbox-count');
+  const prevBtn = $('#lightbox-prev');
+  const nextBtn = $('#lightbox-next');
+  let group = [];
+  let index = 0;
   let current = null;
   let token = 0;
   let shownLevel = 0;
@@ -4192,7 +4316,12 @@ function initGallery() {
     if (!current) return;
     const { w, h: hgt, isArt } = current;
     const maxScale = isArt ? 1 : 2;
-    const width = Math.min(window.innerWidth * 0.92, ((window.innerHeight * 0.9 - 90) * w) / hgt, w * maxScale);
+    // Место под стрелки: на широком экране они по бокам, на узком — внизу.
+    const narrow = window.innerWidth <= 560;
+    const browsing = group.length > 1;
+    const room = window.innerWidth * 0.92 - (browsing && !narrow ? 128 : 0);
+    const tall = window.innerHeight * 0.9 - 90 - (browsing && narrow ? 64 : 0);
+    const width = Math.min(room, (tall * w) / hgt, w * maxScale);
     img.classList.toggle('is-pixel', !isArt && w <= 640);
     img.style.width = Math.max(200, Math.floor(width)) + 'px';
   };
@@ -4211,31 +4340,82 @@ function initGallery() {
     (probe.decode ? probe.decode() : Promise.resolve()).then(put, put);
   };
 
+  // Подпись копируется из подписи под картинкой вместе с разметкой:
+  // японский текст остаётся в своём шрифте, ссылка на автора — ссылкой.
+  const captionOf = (btn) => {
+    const caption = btn.closest('figure')?.querySelector('figcaption');
+    if (!caption) return [];
+    const credits = caption.querySelectorAll('.fan-cap, .fan-credit');
+    const nodes = [];
+    for (const piece of credits.length ? credits : [caption]) {
+      if (nodes.length) nodes.push(' · ');
+      const copy = piece.cloneNode(true);
+      const game = copy.querySelector('.shot-game');
+      if (game) game.replaceWith(...game.childNodes, ' — ');
+      nodes.push(...copy.childNodes);
+    }
+    return nodes;
+  };
+
+  function openAt(i) {
+    index = (i + group.length) % group.length;
+    const btn = group[index];
+    const pic = btn.querySelector('img');
+    const preview = pic.currentSrc || pic.src;
+    const full = pic.dataset.full || preview;
+    current = {
+      w: Number(pic.getAttribute('width')) || pic.naturalWidth,
+      h: Number(pic.getAttribute('height')) || pic.naturalHeight,
+      isArt: Boolean(btn.closest('.fan')),
+    };
+    const mine = ++token;
+    shownLevel = 0;
+    img.style.visibility = 'hidden';
+    img.alt = pic.alt;
+    const text = captionOf(btn);
+    cap.replaceChildren(...text);
+    count.textContent = group.length > 1 ? `${index + 1} / ${group.length}${text.length ? ' · ' : ''}` : '';
+    prevBtn.hidden = nextBtn.hidden = group.length < 2;
+    fit();
+    if (!box.open) box.showModal();
+    show(preview, mine, 1);
+    if (full !== preview) show(full, mine, 2);
+    // Соседние превью на странице могут быть ещё не загружены: просим их загрузиться сразу.
+    for (const step of [-1, 1]) {
+      const near = group[(index + step + group.length) % group.length]?.querySelector('img');
+      if (near && !near.complete) near.loading = 'eager';
+    }
+  }
+
   for (const btn of $$('.shot-open')) {
     btn.addEventListener('click', () => {
-      const pic = btn.querySelector('img');
-      const caption = btn.closest('figure')?.querySelector('figcaption');
-      const preview = pic.currentSrc || pic.src;
-      const full = pic.dataset.full || preview;
-      current = {
-        w: Number(pic.getAttribute('width')) || pic.naturalWidth,
-        h: Number(pic.getAttribute('height')) || pic.naturalHeight,
-        isArt: Boolean(btn.closest('.fan')),
-      };
-      const mine = ++token;
-      shownLevel = 0;
-      img.style.visibility = 'hidden';
-      img.alt = pic.alt;
-      const parts = caption ? [...caption.querySelectorAll('.fan-cap, .fan-credit')].map((n) => n.textContent.trim()) : [];
-      cap.textContent = parts.length
-        ? parts.join(' · ')
-        : caption ? caption.textContent.replace(/\s+/g, ' ').trim() : '';
-      fit();
-      box.showModal();
-      show(preview, mine, 1);
-      if (full !== preview) show(full, mine, 2);
+      group = $$('.shot-open', btn.closest('section') || document);
+      openAt(group.indexOf(btn));
     });
   }
+  prevBtn.addEventListener('click', () => openAt(index - 1));
+  nextBtn.addEventListener('click', () => openAt(index + 1));
+  // Слушаем весь документ: после щелчка по картинке фокус уходит из диалога.
+  document.addEventListener('keydown', (ev) => {
+    if (!box.open || group.length < 2) return;
+    if (ev.key === 'ArrowLeft') {
+      ev.preventDefault();
+      openAt(index - 1);
+    } else if (ev.key === 'ArrowRight') {
+      ev.preventDefault();
+      openAt(index + 1);
+    }
+  });
+  let startX = null;
+  img.addEventListener('pointerdown', (ev) => { startX = ev.clientX; });
+  img.addEventListener('pointerup', (ev) => {
+    if (startX === null || group.length < 2) return;
+    const dx = ev.clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 50) openAt(index + (dx < 0 ? 1 : -1));
+  });
+  img.addEventListener('pointercancel', () => { startX = null; });
+
   $('#lightbox-close').addEventListener('click', () => box.close());
   // Щелчок по затемнению вокруг снимка закрывает его.
   box.addEventListener('click', (ev) => {
@@ -4271,6 +4451,36 @@ function initVideo() {
       link.replaceWith(frame);
     });
   }
+}
+
+// ── 47-theme.js ──
+// Переключатель темы: «эта сторона» (светлая) и «изнанка сукимы» (тёмная).
+// По умолчанию сайт следует теме системы; выбор запоминается в браузере.
+// Ранняя установка темы — маленький скрипт в <head> (src/page.html),
+// чтобы страница не мигала светлой темой при загрузке.
+
+function initTheme() {
+  const btn = $('#theme-toggle');
+  if (!btn) return;
+  const root = document.documentElement;
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const current = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+
+  const render = () => {
+    const dark = current() === 'dark';
+    btn.setAttribute('aria-pressed', String(dark));
+    btn.setAttribute('aria-label', dark ? 'Тёмная тема: изнанка сукимы. Переключить на светлую' : 'Светлая тема: эта сторона. Переключить на тёмную');
+    btn.title = dark ? 'Изнанка сукимы' : 'Эта сторона';
+  };
+
+  btn.addEventListener('click', () => {
+    const next = current() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    store.set('theme', next);
+    render();
+  });
+  systemDark.addEventListener('change', render);
+  render();
 }
 
 // ── 50-ticket.js ──
@@ -4516,10 +4726,24 @@ function initTicket() {
 }
 
 // ── 90-main.js ──
-// Подсветка текущего раздела в шапке.
+// Подсветка текущего раздела в шапке. На узком экране меню — ряд, который
+// прокручивается вбок: подсвеченный пункт подъезжает в середину ряда,
+// а край ряда тает, если за ним есть ещё пункты.
 function initNav() {
+  const nav = $('.nav');
   const links = $$('.nav a[href^="#"]');
-  if (!links.length || !('IntersectionObserver' in window)) return;
+  if (!nav || !links.length) return;
+  const behavior = () => (reducedMotion.matches ? 'auto' : 'smooth');
+  const fade = () => {
+    const max = nav.scrollWidth - nav.clientWidth;
+    nav.classList.toggle('fade-l', nav.scrollLeft > 2);
+    nav.classList.toggle('fade-r', nav.scrollLeft < max - 2);
+  };
+  nav.addEventListener('scroll', fade, { passive: true });
+  window.addEventListener('resize', fade);
+  fade();
+
+  if (!('IntersectionObserver' in window)) return;
   const byId = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
   const observer = new IntersectionObserver((entries) => {
     for (const entry of entries) {
@@ -4528,6 +4752,14 @@ function initNav() {
       // На первом экране ни один пункт меню не подсвечен.
       const link = byId.get(entry.target.id);
       if (link) link.setAttribute('aria-current', 'true');
+      if (nav.scrollWidth <= nav.clientWidth) continue;
+      if (!link) {
+        nav.scrollTo({ left: 0, behavior: behavior() });
+        continue;
+      }
+      const row = nav.getBoundingClientRect();
+      const item = link.getBoundingClientRect();
+      nav.scrollBy({ left: item.left - row.left - (row.width - item.width) / 2, behavior: behavior() });
     }
   }, { rootMargin: '-45% 0px -50% 0px' });
   for (const id of [...byId.keys(), 'top']) {
@@ -4559,9 +4791,41 @@ function initAnchors() {
   }
 }
 
+// Кнопка «наверх» появляется, когда первый экран ушёл из вида.
+// Над игровым полем она прячется: там палец водит корабль.
+function initToTop() {
+  const btn = $('#to-top');
+  const hero = $('#top');
+  if (!btn || !hero || !('IntersectionObserver' in window)) return;
+  const stage = $('#stage');
+  let pastHero = false;
+  let overStage = false;
+  const update = () => btn.classList.toggle('is-shown', pastHero && !overStage);
+  // При быстрой прокрутке в одной пачке бывает и вход, и выход: верна последняя запись.
+  const last = (entries) => entries[entries.length - 1].isIntersecting;
+  new IntersectionObserver((entries) => {
+    pastHero = !last(entries);
+    update();
+  }).observe(hero);
+  if (stage) {
+    new IntersectionObserver((entries) => {
+      overStage = last(entries);
+      update();
+    }).observe(stage);
+  }
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+    const title = $('#hero-title');
+    if (title) {
+      title.setAttribute('tabindex', '-1');
+      title.focus({ preventScroll: true });
+    }
+  });
+}
+
 // Скрипт стоит в конце страницы, разметка уже разобрана.
 // Модули запускаются независимо: ошибка в одном не ломает остальные.
-for (const init of [initSukima, initGallery, initVideo, initBoundary, initDanmaku, initTicket, initNav, initAnchors]) {
+for (const init of [initSukima, initGallery, initVideo, initBoundary, initDanmaku, initTicket, initTheme, initNav, initAnchors, initToTop]) {
   try {
     init();
   } catch (err) {
